@@ -1,7 +1,7 @@
 {
   "layered-image":
   {
-    "background" : "$media:background",
-    "foreground" : "$media:foreground"
+    "background" : "$media:amap_icon_orange",
+    "foreground" : "$media:amap_icon_orange"
   }
 }

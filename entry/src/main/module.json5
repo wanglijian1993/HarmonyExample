@@ -17,7 +17,49 @@
         "name": "EntryAbility",
         "srcEntry": "./ets/entryability/EntryAbility.ets",
         "description": "$string:EntryAbility_desc",
-        "icon": "$media:layered_image",
+        "icon": "$media:startIcon",
+        "label": "$string:EntryAbility_label",
+        "startWindowIcon": "$media:startIcon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
+        "launchType": "standard",
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "ohos.want.action.home"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "EntryAbility01",
+        "srcEntry": "./ets/entryability/EntryAbility01.ets",
+        "description": "$string:EntryAbility_desc",
+        "icon": "$media:startIcon",
+        "label": "$string:EntryAbility_label",
+        "startWindowIcon": "$media:startIcon",
+        "startWindowBackground": "$color:start_window_background",
+        "launchType": "specified",
+        "exported": true,
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "ohos.want.action.home"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "SpecifiedSecondAbility",
+        "srcEntry": "./ets/entryability/SpecifiedFirstAbility.ets",
+        "description": "$string:EntryAbility_desc",
+        "icon": "$media:startIcon",
         "label": "$string:EntryAbility_label",
         "startWindowIcon": "$media:startIcon",
         "startWindowBackground": "$color:start_window_background",
@@ -28,7 +70,7 @@
               "entity.system.home"
             ],
             "actions": [
-              "action.system.home"
+              "ohos.want.action.home"
             ]
           }
         ]

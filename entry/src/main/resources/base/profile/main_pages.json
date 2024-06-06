@@ -1,5 +1,7 @@
 {
   "src": [
-    "pages/WrapBuilder/WrapBuilderExample1"
+    "pages/ability/Page_StartModel",
+    "pages/ability/Index",
+    "pages/ability/Index02"
   ]
 }

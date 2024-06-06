@@ -1,27 +1,30 @@
-import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
+import AbilityStage from '@ohos.app.ability.AbilityStage';
+import type Want from '@ohos.app.ability.Want';
 import { hilog } from '@kit.PerformanceAnalysisKit';
+import { AbilityConstant } from '@kit.AbilityKit';
 import { window } from '@kit.ArkUI';
-const DOMAIN_NUMBER: number = 0xFF00;
-const TAG: string = '[EventAbility]';
 
-export default class EntryAbility extends UIAbility {
-  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+export default class SpecifiedFirstAbility extends AbilityStage {
+  onAcceptWant(want: Want): string {
+    // 在被调用方的AbilityStage中，针对启动模式为specified的UIAbility返回一个UIAbility实例对应的一个Key值
+    // 当前示例指的是module1 Module的SpecifiedAbility
+    hilog.info(0x0000, 'testTag', '%{public}s', `onAcceptWant ${want.abilityName}---want.parameters:${want.parameters}`);
+
+    if (want.abilityName === 'SpecifiedFirstAbility' || want.abilityName === 'SpecifiedSecondAbility') {
+      // 返回的字符串Key标识为自定义拼接的字符串内容
+      if (want.parameters) {
+        return `SpecifiedAbilityInstance_${want.parameters.instanceKey}`;
+      }
+    }
+
+    return '';
+  }
+
+  onCreate(): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
-    // 获取UIAbility实例的上下文
-    let context = this.context;
-    // 获取eventHub
-    let eventhub = this.context.eventHub;
-    // 执行订阅操作
-    eventhub.on('event1', this.eventFunc);
-    eventhub.on('event1', (data: string) => {
-      // 触发事件，完成相应的业务操作
-    });
-    hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onCreate');
+
   }
-  eventFunc(argOne: Context, argTwo: Context): void {
-    hilog.info(DOMAIN_NUMBER, TAG, '1. ' + `${argOne}, ${argTwo}`);
-    return;
-  }
+
   onDestroy(): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onDestroy');
   }
@@ -32,7 +35,7 @@ export default class EntryAbility extends UIAbility {
 
     windowStage.on('windowStageEvent',(data)=>{
 
-     let stageEventType: window.WindowStageEventType = data;
+      let stageEventType: window.WindowStageEventType = data;
       switch (stageEventType){
         case window.WindowStageEventType.SHOWN: // 切到前台
           hilog.info(0x0000,'testTag','windowStage foreground.');
@@ -51,8 +54,7 @@ export default class EntryAbility extends UIAbility {
       }
 
     })
-
-    windowStage.loadContent('pages/ability/Page_EventHub', (err) => {
+    windowStage.loadContent('pages/ability/Page_StartModel', (err) => {
       if (err.code) {
         hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
         return;

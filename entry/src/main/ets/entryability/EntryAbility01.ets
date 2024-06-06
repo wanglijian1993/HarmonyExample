@@ -1,27 +1,12 @@
 import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-const DOMAIN_NUMBER: number = 0xFF00;
-const TAG: string = '[EventAbility]';
 
-export default class EntryAbility extends UIAbility {
+export default class EntryAbility01 extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
-    // 获取UIAbility实例的上下文
-    let context = this.context;
-    // 获取eventHub
-    let eventhub = this.context.eventHub;
-    // 执行订阅操作
-    eventhub.on('event1', this.eventFunc);
-    eventhub.on('event1', (data: string) => {
-      // 触发事件，完成相应的业务操作
-    });
-    hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onCreate');
   }
-  eventFunc(argOne: Context, argTwo: Context): void {
-    hilog.info(DOMAIN_NUMBER, TAG, '1. ' + `${argOne}, ${argTwo}`);
-    return;
-  }
+
   onDestroy(): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onDestroy');
   }
@@ -29,10 +14,9 @@ export default class EntryAbility extends UIAbility {
   onWindowStageCreate(windowStage: window.WindowStage): void {
     // Main window is created, set main page for this ability
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
-
     windowStage.on('windowStageEvent',(data)=>{
 
-     let stageEventType: window.WindowStageEventType = data;
+      let stageEventType: window.WindowStageEventType = data;
       switch (stageEventType){
         case window.WindowStageEventType.SHOWN: // 切到前台
           hilog.info(0x0000,'testTag','windowStage foreground.');
@@ -51,8 +35,7 @@ export default class EntryAbility extends UIAbility {
       }
 
     })
-
-    windowStage.loadContent('pages/ability/Page_EventHub', (err) => {
+    windowStage.loadContent('pages/ability/Index02', (err) => {
       if (err.code) {
         hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
         return;
