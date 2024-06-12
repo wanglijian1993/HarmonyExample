@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "MyabilitystageAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "MyabilitystageAbility_label",
+      "value": "label"
+    }
+  ]
+}
