@@ -3,7 +3,7 @@
     "name": "entry",
     "type": "entry",
     "description": "$string:module_desc",
-    "mainElement": "EntryAbility",
+    "mainElement": "EmiiterEntryAbility",
     "deviceTypes": [
       "phone",
       "tablet",
@@ -74,6 +74,16 @@
             ]
           }
         ]
+      },
+      {
+        "name": "EmiiterEntryAbility",
+        "srcEntry": "./ets/entryability/EmiiterEntryAbility.ets",
+        "description": "$string:EntryAbility_desc",
+        "icon": "$media:startIcon",
+        "label": "$string:EntryAbility_label",
+        "startWindowIcon": "$media:startIcon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
       }
     ],
   },

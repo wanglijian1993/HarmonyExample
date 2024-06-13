@@ -2,6 +2,7 @@
   "src": [
     "pages/ability/Page_StartModel",
     "pages/ability/Index",
-    "pages/ability/Index02"
+    "pages/ability/Index02",
+    "pages/emitter/EmitterPage"
   ]
 }
