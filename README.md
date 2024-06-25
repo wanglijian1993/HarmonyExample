@@ -4,7 +4,7 @@
 ### 简介
 AbilityKit是Harmony系统框架服务，通过AbilityKit的系统服务能力，开发者通过框架中的组件和服务快速开发自己想要的程序。
 ### 使用场景
-<ul>
+<ul>        
 <li>
 应用多Model开发：应用可通过不同类型的Module（HAP、HAR、HSP）来实现应用的功能开发。其中，HAP用于实现应用的功能和特性，HAR与HSP用于实现代码和资源的共享。
 </li>
@@ -147,6 +147,126 @@ startWindowIcon:启动显示的标签
 </li>
 <li>
 skills:entities中添加"entity.system.home"、actions中添加"ohos.want.action.home"。同一个应用有多个UIAbility配置上述字段时，桌面上会显示出多个图标.
-
 </li>
 </ul>
+
+## 鸿蒙线程通信的方法
+
+### Emitter
+
+Emiiter提供了同一进程不同线程或同一进程同一线程数据传递的能力
+订阅事件步骤
+1.定义emitter.InnerEvent
+2.定义callback
+3.emitter.on订阅事件
+发送事件的步骤
+1.匹配eventId事件
+2.发送emitter.EventData数据源
+3.emitter.emitter发送事件
+
+### EventHub
+api 9.0 的功能
+
+## 自定义组件的生命周期
+aboutToAppear:界面即将显示的时候回调该接口
+build:构建组件ui效果
+onDidBuild: 组件build()函数执行完成之后回调该接口，不建议在onDidBuild函数中更改状态变量、使用animateTo等功能，这可能会导致不稳定的UI表现。    
+aboutToDisappear:boutToDisappear函数在自定义组件析构销毁之前执行。不允许在aboutToDisappear函数中改变状态变量，特别是@Link变量的修改可能会导致应用程序行为不稳定。
+
+onPageShow:页面出现的时候显示一次
+onPageHide:页面隐藏时显示一次
+onBackPress:当用户点击返回键触发
+![img_5.png](img_5.png)
+
+## 组件通信的方式有哪些
+1. Prop 单向同步数据 父->子
+2. Link 双向同步数据 父<->子
+3. provide，Consume 不用传递数据 双向同步数据
+4. observed objectLink
+5. State 组件内状态
+## 弹窗UI是怎么在页面UI中使用的  
+CustomtDialog
+
+## 常用的修饰符有哪些介绍一下
+State
+Prop
+Link
+Provide
+Consume
+Observed
+ObjectLink
+Builder
+BuilderParams
+Styles
+Extends
+Require
+Entry
+Component
+CustomDialog
+Concurrent -taskpool
+Watch
+StorageProp
+StorageLink
+LocalStorageProp
+LocalStorageLink
+Track
+Prewview
+
+## Builder和BuilderParams的区别
+Builder 轻量级组件结构
+BuilderParams 在@Compoent组件中定义@Builder组件类型，通过@BuilderParams定义的组件类型只能传入@Builder修饰的组件
+
+## 对于一些公共的样式你是怎么做的？有没有什么优化的方式
+Style 共同属性的封装，可以用于全局和组件内定义
+
+Extend 仅支持全局定义，
+## 说说ability生命周期
+onCreate
+onWindowStateCreate去加载Entry修饰的@CompoentUi组件
+foreground
+background
+OnDestory
+
+## 鸿蒙和安卓和IOS的区别
+鸿蒙是微内核架构，可以让包体积更小，程序更快，
+Android是从下往上依次分为Linux内核、HAL、系统Native库和Android运行时环境、Java框架层以及应用层这5层架构
+IOS不太了解
+Android是开源的可以更好的应用在市场上，鸿蒙openHarmony是开源的鸿蒙OS是基于OpenHarmony上开发出来的商业版系统，
+鸿蒙和IOS发展方向更像，提供服务的API给开发者使用，更利于系统的稳定性和安全性。
+语法上，Android一开始基于java语法，后面出现自己的Kotlin，鸿蒙是基于ts封装的arkTs，IOS是oc后面出的swift
+
+## 你项目用到了鸿蒙那些功能?
+ArkUi上的功能基本都涉及到了，首选项，线程数据同步，网络，动画，数据同步的关键符
+
+## 说说鸿蒙开发中的通信
+IPC/RPC
+IPC/RPC都是进程间通信，IPC用的是binder，RPC用的是软总线驱动，用于跨设备跨进程通信。
+需要跨进程通信的原因是因为每个进程都有自己独立的资源和内存空间，其他进程不能随意访问不同进程的内存和资源，IPC/RPC便是为了突破这一点。
+
+## 你说你开发过项目，那么，开发鸿蒙项目流程是怎么样的？简单介绍一下
+目前公司没有规划鸿蒙项目，我是单独开发的抖音鸿蒙版本也算是练手的项目，鸿蒙声明式UI的特性状态驱动ui更新，天生的mvvm架构的特性，
+封装网络请求和一些功能组件(首选项，titlebar，路由跳转的url等)
+
+## 共享库之间怎么进行页面跳转
+● import动态引入共享库的页面
+● 给共享库一个entry的name属性
+● 使用pushRouteName
+● 不要忘记导入依赖
+1.import倒入共享库页面
+2.router.pushUrl(@Bundle:/包名(bundlerName)/依赖库名称/界面地址)
+
+## 鸿蒙的刷新机制是怎么样的，多层嵌套时，是从build开始刷新吗
+刷新机制只检测第一层数据变化，不论什么修饰符，从最外层开始，但是会进行比较，如果该属性数据没有变化，该层级不刷新
+ForEach- 只要key发生了变化，就会更新-
+如果不给key, 那么就会实现index_JSON.stringify(item)的方式
+是从build开始刷新，但是并不是开始更新- 只有对应数据变化了 才会进行组件的销毁去重新创建
+
+*性能优化建议不要太多层级，否则会影响性能
+
+## 项目中有用到多线程嘛，具体说一下多线程的1作用，如何使用的
+用了，因为我们要提高性能。
+自定义组件创建完成之后，在build函数执行之前，将先执行aboutToAppear()生命周期回调函数。
+此时若在该函数中执行耗时操作，将阻塞UI渲染，增加UI主线程负担。因此，应尽量避免在自定义组件的生命周期内执行高耗时操作。
+在aboutToAppear()生命周期函数内建议只做当前组件的初始化逻辑，对于不需要等待结果的高耗时任务，可以使用多线程处理该任务，
+通过并发的方式避免主线程阻塞；也可以把耗时操作改为异步并发或延后处理，保证主线程优先处理组件绘制逻辑。
+
