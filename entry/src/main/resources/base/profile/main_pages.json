@@ -5,6 +5,7 @@
     "pages/ability/Index02",
     "pages/emitter/EmitterPage",
     "pages/ability/ThreadPoolPage",
-    "pages/sheet/SheetTransitionExample"
+    "pages/sheet/SheetTransitionExample",
+    "pages/ability/AxiosPage"
   ]
 }

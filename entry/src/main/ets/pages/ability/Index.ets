@@ -51,10 +51,14 @@ struct Index{
             console.info('Invoke replaceUrl succeeded.');
           })
         })
-
       Navigator({target:'pages/sheet/SheetTransitionExample',type: NavigationType.Push}){
         Button('Sheet')
       }
+      Button('网络请求')
+        .onClick((click:ClickEvent)=>{
+          router.pushUrl({url:'pages/ability/AxiosPage'})
+          })
+
     }
 
   }
