@@ -1,18 +1,20 @@
 import { common, Want } from '@kit.AbilityKit'
 import { hilog } from '@kit.PerformanceAnalysisKit'
 import { BusinessError } from '@kit.BasicServicesKit';
+import router from '@ohos.router';
 
 const TAG: string = '[Page_StartModel]';
 const DOMAIN_NUMBER: number = 0xFF00;
 function getInstance() : string {
   return 'KEY';
 }
-
+@Preview
 @Entry
 @Component
 struct Index{
   private KEY_NEW = 'KEY';
-
+  @State scale1: number = 1
+  @State opacity1: number = 1
   build() {
 
     Column(){
@@ -29,6 +31,7 @@ struct Index{
             moduleName: 'entry', // moduleName非必选
             parameters: { // 自定义信息
               instanceKey: getInstance()
+
             }
           };
           context.startAbility(want).then(() => {
@@ -38,6 +41,20 @@ struct Index{
           })
           this.KEY_NEW = this.KEY_NEW + 'a';
         })
+      Button('线程')
+        .onClick((click:ClickEvent)=>{
+          router.pushUrl({url:'pages/ability/ThreadPoolPage'},router.RouterMode.Standard,(err)=>{
+            if (err) {
+              console.error(`Invoke replaceUrl failed, code is ${err.code}, message is ${err.message}`);
+              return;
+            }
+            console.info('Invoke replaceUrl succeeded.');
+          })
+        })
+
+      Navigator({target:'pages/sheet/SheetTransitionExample',type: NavigationType.Push}){
+        Button('Sheet')
+      }
     }
 
   }

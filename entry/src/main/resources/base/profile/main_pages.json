@@ -3,6 +3,8 @@
     "pages/ability/Page_StartModel",
     "pages/ability/Index",
     "pages/ability/Index02",
-    "pages/emitter/EmitterPage"
+    "pages/emitter/EmitterPage",
+    "pages/ability/ThreadPoolPage",
+    "pages/sheet/SheetTransitionExample"
   ]
 }

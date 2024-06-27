@@ -3,7 +3,7 @@
     "name": "entry",
     "type": "entry",
     "description": "$string:module_desc",
-    "mainElement": "EmiiterEntryAbility",
+    "mainElement": "EntryAbility",
     "deviceTypes": [
       "phone",
       "tablet",

@@ -270,3 +270,85 @@ ForEach- 只要key发生了变化，就会更新-
 在aboutToAppear()生命周期函数内建议只做当前组件的初始化逻辑，对于不需要等待结果的高耗时任务，可以使用多线程处理该任务，
 通过并发的方式避免主线程阻塞；也可以把耗时操作改为异步并发或延后处理，保证主线程优先处理组件绘制逻辑。
 
+## 线程
+鸿蒙并发采用Promise和async await语法糖二种，
+多线程ThreadPool，单独创建线程是Worker
+ThreadPool线程池可以管理线程的创建和销毁，内部机制，1.超过三分钟空闲的线程自动销毁 2.超长任务（大于3分钟且非长时任务）会被系统自动回收 3.，序列化传输的数据量大小限制为16MB 4.实现任务的函数需要使用装饰器@Concurrent
+Worker的限制就是需要开发人员管理创建和销毁，使用复杂一些，需要单独创建Woker类并且在配置main_profile.xml配置，不能创建超过64个Worker线程，序列化传输的数据量大小限制为16MB
+
+## 什么是鸿蒙应用签名？
+指纹-就是一堆证明当然项目可被agc识别并允许调试到设备的说明文件
+p12
+csr
+cer
+p7b
+
+## typescript javascript, 和arts的关系1
+ts是js的超集，js有的,ts全有，ts说白了就是对js的类型进行了强制性的约束
+arkts阉割了一部分的ts的动态属性的特性，基本继承了ts的语法特性和前端的一些api特性
+比如ts中的解构赋值，字面量类型，延展运算符，bind和call/applay
+## 线程池的作用，线程和线程池的关系
+我看文档说，鸿蒙本身有负载均衡的调试，我们用的每一个task也就是线程都处在taskPool的线程中，
+它会根据我们赋予的权限级别进行动态调优，在鸿蒙中使用线程没有锁的概念
+
+## 有没有开发过卡片，介绍一下,元服务了解吗?具体介绍一下
+卡片是基于应用的能力，元服务可以理解为跟快捷入口，根据设定的场景触发元服务，元服务大小不能超过2MB
+
+## 我看你在这个音乐项目中用到了断点续播，它是如何实现的
+每隔一秒钟就记录当前歌曲的seek的音乐时间点，下次再进入的时候直接回拨回去
+
+## 多线程Worker和TaskPool的区别是什么？是否能自动更新UI？worker最大的数量是多少？
+Worker和TaskPool
+不能更新UI
+最大数量64个， 用完worker要销毁
+## 自选列表刷新逻辑，如何排序？
+直接用List.sort()
+
+## UiAbility页面启动的方式有哪些？
+单例/多例
+
+## 如何引入本地的web页面？
+web({ src: $rawfile("index.html")，controller: new weview.WebviewController()  })组件
+
+## 不使用CustomDialog和条件渲染怎么实现一个像prompt.showToast的弹窗效果
+使用创建subwindow的方式来实现
+传入一个参数，设置窗口的宽度和高度，创建弹窗，通过loadContent加载一个UI页面，页面中传入参数，
+
+## @Provide和@Consume的使用中，消费者修改了值，提供者那边会变化吗？
+当然会，因为都是双向的
+
+## 输入框获取焦点，弹出键盘会将页面推至屏幕外，想正常显示，应该怎么处理？
+设置键盘的避让模式，有个API直接设置一下压缩一下内容就可以了
+
+## 鸿蒙客户端怎么实现长登陆的；再说说token的失效后是如何处理的？
+● token是登录之后得到的，如果失效应该去换取token，还应有一个refreshToken,
+● refreshToken换取一个新的token
+● 如果换取成功-替换原有token-重启发请求
+● 如果换取失败-删除token-删除refreshToken-跳转到登页
+
+## 详细讲讲混合开发，网页如何调用系统能力。
+参考讲义的鸿蒙的混合开发
+端口通信
+controller
+web()
+.javascriptProxy()
+this.controller.registerJavacriptProxy() // 可以注入多个方法
+this.controller.registerJavacriptProxy()
+this.controller.registerJavacriptProxy()
+this.controller.registerJavacriptProxy()
+
+## A页面->B页面->C页面 C页面改变了A和B页面的值 那两个页面会不会同步改变，（b页面back了c页面再back是回到哪去）
+如果A和B用的是全局的状态，C改完之后，A和B会变化
+
+## 多线程使用首选项需要注意什么
+需要注意的是Worker不能用首选项，因为涉及到线程安全的模块，现在目前不让用
+如果非要用，那就得需要线程锁
+## Ability传递参数时 参数带不带类型
+不带类型
+want.paramers as Record<string, string>
+## 除了har包和HSP包 还能打成什么包？有什么区别
+app- 综合包
+har-静态包-会出现多次拷贝
+hsp-共享包-只会有一次
+hap- 带ability,只有它带
+## 为什么用@link能实现的 不全部直接使用@StorageLink替代
