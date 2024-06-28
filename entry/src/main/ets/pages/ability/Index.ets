@@ -67,7 +67,15 @@ struct Index{
         .onClick((click:ClickEvent)=>{
           router.pushUrl({url:'pages/ability/ThemePage'})
         })
-    }
+      Button('动画1')
+        .onClick((click:ClickEvent)=>{
+          router.pushUrl({url:'pages/ability/AnimationPage'})
+        })
+      Button('动画2')
+        .onClick((click:ClickEvent)=>{
+          router.pushUrl({url:'pages/ability/AnimationPage01'})
+        })
+}
 
   }
 

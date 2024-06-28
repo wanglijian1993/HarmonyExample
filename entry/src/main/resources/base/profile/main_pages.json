@@ -8,6 +8,8 @@
     "pages/sheet/SheetTransitionExample",
     "pages/ability/AxiosPage",
     "pages/ability/RefreshPage",
-    "pages/ability/ThemePage"
+    "pages/ability/ThemePage",
+    "pages/ability/AnimationPage",
+    "pages/ability/AnimationPage01"
   ]
 }
