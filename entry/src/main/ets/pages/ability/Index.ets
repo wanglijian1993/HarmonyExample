@@ -58,9 +58,14 @@ struct Index{
         .onClick((click:ClickEvent)=>{
           router.pushUrl({url:'pages/ability/AxiosPage'})
           })
+        .backgroundColor($r('app.color.theme_color'))
       Button('刷新')
         .onClick((click:ClickEvent)=>{
           router.pushUrl({url:'pages/ability/RefreshPage'})
+        })
+      Button('主题')
+        .onClick((click:ClickEvent)=>{
+          router.pushUrl({url:'pages/ability/ThemePage'})
         })
     }
 

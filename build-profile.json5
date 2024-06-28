@@ -5,8 +5,8 @@
       {
         "name": "default",
         "signingConfig": "default",
-        "compileSdkVersion": "4.1.0(11)",
-        "compatibleSdkVersion": "4.1.0(11)",
+        "compatibleSdkVersion": "5.0.0(12)",    //指定HarmonyOS应用/服务兼容的最低版本。注意使用英文.和()
+        "targetSdkVersion": "5.0.0(12)",
         "runtimeOS": "HarmonyOS",
       }
     ],
