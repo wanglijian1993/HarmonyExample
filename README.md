@@ -351,4 +351,8 @@ app- 综合包
 har-静态包-会出现多次拷贝
 hsp-共享包-只会有一次
 hap- 带ability,只有它带
-## 为什么用@link能实现的 不全部直接使用@StorageLink替代
+## 主题
+全局
+ThemeControl.setDefaultTheme去设置主题颜色全局生效
+局部生效
+WhithTheme包裹局部组件去配置颜色
