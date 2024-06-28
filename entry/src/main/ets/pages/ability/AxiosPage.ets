@@ -17,6 +17,7 @@ struct AxiosPage{
 
 
   harmonyHttp(){
+    console.info("AxisoPage----request--network")
     // 使用 MyAxiosCallBack 实例来调用 get 函数
     get<string>('banner/json')
       .then((result:string)=>{
@@ -25,7 +26,7 @@ struct AxiosPage{
       .catch((err:Error)=>{
         console.info(`err:${err.message}`)
        })
-
+    console.info("AxisoPage----request--ended ")
   }
 
 

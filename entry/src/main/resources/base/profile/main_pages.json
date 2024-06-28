@@ -6,6 +6,7 @@
     "pages/emitter/EmitterPage",
     "pages/ability/ThreadPoolPage",
     "pages/sheet/SheetTransitionExample",
-    "pages/ability/AxiosPage"
+    "pages/ability/AxiosPage",
+    "pages/ability/RefreshPage"
   ]
 }
