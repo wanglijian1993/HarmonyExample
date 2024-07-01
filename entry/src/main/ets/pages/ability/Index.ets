@@ -13,10 +13,11 @@ function getInstance() : string {
 @Component
 struct Index{
   private KEY_NEW = 'KEY';
-  @State scale1: number = 1
+  @State   scale1: number = 1
   @State opacity1: number = 1
-  build() {
 
+
+  build() {
     Column(){
       Text('页面1')
       Button('跳转二级页面')
@@ -76,8 +77,10 @@ struct Index{
           router.pushUrl({url:'pages/ability/AnimationPage01'})
         })
 }
+.id("abc")
 
   }
+
 
 
 }
