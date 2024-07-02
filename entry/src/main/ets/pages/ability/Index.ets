@@ -76,6 +76,10 @@ struct Index{
         .onClick((click:ClickEvent)=>{
           router.pushUrl({url:'pages/ability/AnimationPage01'})
         })
+      Button('状态')
+        .onClick((click:ClickEvent)=>{
+          router.pushUrl({url:'pages/ability/StatePage'})
+        })
 }
 .id("abc")
 
